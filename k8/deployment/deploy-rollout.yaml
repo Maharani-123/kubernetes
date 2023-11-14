@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd-deploy-rollout
+  labels:
+    purpose: test
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: httpdk
+  strategy:
+   type: Recreate
+  template:
+   metadata:
+     name: httpd-deploy-rollout-pod
+     labels:
+       app: httpdk
+   spec:
+    containers:
+    - name: httpd-container-rollout
+      image: nginx:1.23
